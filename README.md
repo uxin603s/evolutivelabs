@@ -18,7 +18,7 @@ yarn serve:db
 * 針對題目若有任何疑問，也可以來信詢問
 
 ## 題目
-clone 此專案，並以新建立的 branch 進行作答。請參考[設計稿](https://www.figma.com/file/Gvsqct4CKMYsHIrjTOT5FA/For-interview?node-id=0%3A1)實作以下功能：
+clone 此專案，並以新建立的 branch 進行作答。請參考[設計稿](https://www.figma.com/file/Gvsqct4CKMYsHIrjTOT5FA/For-interview?node-id=0%3A1)與[互動原型](https://www.figma.com/proto/Gvsqct4CKMYsHIrjTOT5FA/For-interview)來實作以下功能：
 
 1. 可以切換背板 / 邊框模式
 2. 透過 local API server 取得資料
