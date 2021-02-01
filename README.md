@@ -13,18 +13,14 @@ yarn serve:db
 ```
 
 ## 規則
-* 作答時間 : 2 小時
-* 繳交方式 : 開立另個分支，並於收到題目 3 天後提交
-
-* 如何開始？ 更新下放姓名資訊，並且 commit push 到新的分支，作答時間 Start!
-* 結束時間 2 小時如何計算？ README.md commit 時間 - 最後檔案 commit 時間在 2 小時內
-
-姓名 :
+* 作答時間為 2 小時
+* 繳交方式：收到題目 3 天內，將 repository URL 寄回
+* 針對題目若有任何疑問，也可以來信詢問
 
 ## 題目
-參考 https://www.figma.com/file/Gvsqct4CKMYsHIrjTOT5FA/For-interview?node-id=0%3A1
+clone 此專案，並以新建立的 branch 進行作答。請參考[設計稿](https://www.figma.com/file/Gvsqct4CKMYsHIrjTOT5FA/For-interview?node-id=0%3A1)實作以下功能：
 
-1. 可以切換背板/邊框模式
-2. 串接 API 取得產品資訊
-3. 選擇裝置的 Dropdown 資料來源由 API 取得，使下拉選單呈現產品資訊的裝置
-4. 點選加入購物車按鈕，把產品放入 Vue data 裡的 cartItems 裡面，並 console 出來
+1. 可以切換背板 / 邊框模式
+2. 透過 local API server 取得資料
+3. 透過 dropdown 切換裝置與產品資訊
+4. 點擊加入購物車時，將產品資料存入 `cartItems` ，並使用 `console.log` 印出 `cartItems` 內容
