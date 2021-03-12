@@ -22,7 +22,6 @@ clone 此專案，並以新建立的 branch 進行作答。請參考[設計稿](
 
 1. 透過 local API server 取得資料（執行 `yarn serve:db` ）
 2. 使用者可以透過下拉式選單切換**裝置（device）**
-3. 使用者可以選擇 **邊框樣式（case color）** 與 **背板樣式（backplate style）** 並且點擊樣式預覽
+3. 使用者可以選擇 **邊框樣式（case color）** 與 **背板樣式（backplate style）**
 4. 使用者可以選擇以 **背板模式（standard）** 或 **邊框模式（bumper）** 進行預覽
-5. 使用者可以選擇 **手機顏色** 進行預覽
-6. 點擊加入購物車時，將使用者所選擇的產品資料存入 `cartItems` ，並使用 `console.log` 印出 `cartItems` 內容
+5. 點擊加入購物車時，將使用者所選擇的產品資料存入 `cartItems` ，並使用 `console.log` 印出 `cartItems` 內容
