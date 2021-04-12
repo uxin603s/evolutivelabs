@@ -1,71 +1,122 @@
 <template>
   <div id="purchase">
     <div class="purchase__title-wrapper">
-      <h2 class="purchase__title">二步驟 <br> 打造專屬殼</h2>
+      <h2 class="purchase__title">
+        二步驟 <br />
+        打造專屬殼
+      </h2>
     </div>
     <!-- 手機殼顯示區 -->
     <div class="display__area">
       <section class="purchase__preview">
-        <div class="purchase__preview-images-wrapper">
-          <img src="https://cdn.shopify.com/s/files/1/0740/2335/products/phone45-12-Pro_AppleGraphite_d04b461d-15c3-4e43-9b43-a828eaa4478c.png?v=1603352312" alt="" class="purchase__preview-image main">
-          <img src="https://cdn.shopify.com/s/files/1/0740/2335/products/Black-Bumper_87d2c086-7e6a-4f40-93d9-33828a249bbe.png?v=1597911746" alt="" class="purchase__preview-image sub case">
-          <img src="https://cdn.shopify.com/s/files/1/0740/2335/products/Black-Rim_2e73b29c-7262-463d-b047-2f91a790068a.png?v=1597911791" alt="" class="purchase__preview-image sub rim purchase__preview-image--backward">
-          <img src="https://cdn.shopify.com/s/files/1/0740/2335/products/Black-Button_23534b09-c1aa-4ab4-8174-ded2bc09069e.png?v=1597911773" alt="" class="purchase__preview-image sub button">
-          <img src="https://cdn.shopify.com/s/files/1/0740/2335/products/minisite-NPB0118526L_b4665252-c418-480f-9ca3-b84fb860ca2c.png?v=1603868182" alt="" class="purchase__preview-image sub backplate"></div>
-          <div class="purchase__selector-wrapper phone">
-            <div class="color-container">
-              <p class="color-picker-title">裝置<br>顏色</p>
-              <div class="normal color-picker color-picker--vertical">
-                <div id="apple_graphite" class="color-picker--vertical__option active">
-                  <div class="dot apple_graphite"></div>
-                </div>
-                <div id="silver" class="color-picker--vertical__option">
-                  <div class="dot silver"></div>
-                </div>
-                <div id="gold" class="color-picker--vertical__option">
-                  <div class="dot gold"></div>
-                </div>
-                <div id="pacific_blue" class="color-picker--vertical__option">
-                  <div class="dot pacific_blue"></div>
-                </div>
+        <div class="purchase__preview-images-wrapper" v-if="deviceObject[selectDevice]">
+          <img
+            :src="deviceObject[selectDevice]['手機'].variants[phoneType].image"
+            alt=""
+            class="purchase__preview-image main"
+          />
+          <img
+            :src="deviceObject[selectDevice]['外框'].variants[phoneColorType].image"
+            alt=""
+            class="purchase__preview-image sub case"
+          />
+          <img
+            :src="deviceObject[selectDevice]['飾條'].variants[phoneColorType].image"
+            alt=""
+            class="purchase__preview-image sub rim "
+            :class="modeType==0?'purchase__preview-image--backward ':'backplate'"
+          />
+
+          <img
+            :src="deviceObject[selectDevice]['按鍵'].variants[phoneColorType].image"
+            alt=""
+            class="purchase__preview-image sub button"
+          />
+          <img
+            :src="deviceObject[selectDevice]['背板'].variants[backType].image"
+            alt=""
+            class="purchase__preview-image sub "
+            :class="modeType==1?'purchase__preview-image--backward':'backplate'"
+          />
+        </div>
+        <div class="purchase__selector-wrapper phone">
+          <div class="color-container">
+            <p class="color-picker-title">裝置<br />顏色</p>
+            <div class="normal color-picker color-picker--vertical" v-if="deviceObject[selectDevice]">
+              <pre v-if="0" >{{deviceObject[selectDevice]['手機'].variants}}</pre>
+              <div
+              v-for="(item,index) in deviceObject[selectDevice]['手機'].variants"
+              :key="index"
+                class="color-picker--vertical__option active"
+                @click="phoneType=index"
+              >
+                <div class="dot apple_graphite"></div>
               </div>
+
             </div>
           </div>
-          <div class="purchase__backplate-switch-wrapper">
-            <div class="backplate-switch light">
-              <section class="backplate-switch__common">
-                <div class="backplate-switch__option">
-                  <div class="backplate-switch__checkbox backplate-switch__checkbox--active"></div>
-                  <p class="backplate-switch__mode-name">背板模式</p>
-                </div>
-                <div class="backplate-switch__option">
-                  <div class="backplate-switch__checkbox"></div>
-                  <p class="backplate-switch__mode-name">邊框模式</p>
-                </div>
-              </section>
-            </div>
+        </div>
+        <div class="purchase__backplate-switch-wrapper">
+          <div class="backplate-switch light">
+            <section class="backplate-switch__common">
+              <div class="backplate-switch__option" @click="modeType=0">
+                <div
+                  class="backplate-switch__checkbox backplate-switch__checkbox--active"
+                ></div>
+                <p class="backplate-switch__mode-name">背板模式</p>
+              </div>
+              <div class="backplate-switch__option" @click="modeType=1">
+                <div class="backplate-switch__checkbox"></div>
+                <p class="backplate-switch__mode-name">邊框模式</p>
+              </div>
+            </section>
           </div>
-        </section>
+        </div>
+      </section>
     </div>
     <!-- 型號/顏色顯示區 -->
     <div class="selection__area">
       <div class="selection__area__top">
         <div class="device__selector">
-          <select name="" id="device">
-            <option value="iphone-12-pro-max">iPhone 12 Pro Max</option>
-            <option value="iphone-12-pro">iPhone 12 Pro</option>
-            <option value="iphone-12">iPhone 12</option>
+          <select name="" id="device" v-model="selectDevice">
+            device
+            <option
+            v-for="(item,index) in deviceList"
+            :key="index"
+            :value="item"
+            >{{item}}</option>
           </select>
         </div>
-
+        <pre v-if="deviceObject[selectDevice] && 0">
+        {{deviceObject[selectDevice]['透明背板'].variants[0].image}}
+        {{deviceObject[selectDevice]['背板'].variants[2].image}}
+        </pre>
         <div class="outward">
           <div class="option__block">
             <p class="option__title">手機殼顏色</p>
             <div class="icon"></div>
+            <div v-if="deviceObject[selectDevice]">
+              <button
+              :key="index"
+              v-for="(item,index) in deviceObject[selectDevice]['外框'].variants"
+              @click="phoneColorType=index"
+              >
+                {{item.title}}
+              </button>
+            </div>
           </div>
           <div class="option__block">
             <p class="option__title">背板樣式</p>
             <div class="icon"></div>
+            <div v-if="deviceObject[selectDevice]">
+              <button
+              :key="index"
+              v-for="(item,index) in deviceObject[selectDevice]['背板'].variants"
+              @click="backType=index"
+              >
+                <img width="100" :src="item.image">
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -88,23 +139,55 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  components: {
-  },
-  props: {
-  },
+  components: {},
+  props: {},
   data () {
     return {
       cartItems: [],
-      product: {}
-      // device: bind select
+      product: {},
+      deviceList: [],
+      selectDevice: '',
+      deviceObject: {},
+      phoneType: 0,
+      phoneColorType: 0,
+      backType: 0,
+      modeType: 0
     }
   },
-  computed: {
-
+  computed: {},
+  mounted () {
+    this.fetchProductData()
   },
   methods: {
     fetchProductData () {
+      axios.get('http://localhost:3000/mod-nx').then(({ data: { data } }) => {
+        // console.log(data)
+        const result = {}
+        this.deviceList = []
+        for (let i = 0; i < data.length; i++) {
+          const item = data[i]
+          const title = item.title
+          const aa = title.split('犀牛盾Mod')
+          const device = aa[0].replace(' -', '').trim()
+          if (!result[device]) {
+            result[device] = {}
+            this.deviceList.push(device)
+          }
+          if (aa[1].match(/\(([\d\D]+)\)/)) {
+            let key = RegExp.$1
+            if (key === '按鈕') {
+              key = '按鍵'
+            }
+            result[device][key] = item
+          } else {
+            result[device]['透明背板'] = item
+          }
+        }
+        this.selectDevice = this.deviceList[1]
+        this.$set(this, 'deviceObject', result)
+      })
       // TODO
       // Call API 抓取產品資料並依產品類型分類。
       // API URL : http://localhost:3000/mod-nx
@@ -113,6 +196,19 @@ export default {
     addToCart () {
       // TODO
       // 把選取的產品加到 cartItems 裡面並 console 出來
+      const deviceObject = this.deviceObject
+      const selectDevice = this.selectDevice
+      const phoneType = this.phoneType
+      const phoneColorType = this.phoneColorType
+      const backType = this.backType
+      this.cartItems = []
+      this.cartItems.push(deviceObject[selectDevice]['手機'].variants[phoneType])
+      this.cartItems.push(deviceObject[selectDevice]['外框'].variants[phoneColorType])
+      this.cartItems.push(deviceObject[selectDevice]['飾條'].variants[phoneColorType])
+      this.cartItems.push(deviceObject[selectDevice]['按鍵'].variants[phoneColorType])
+      this.cartItems.push(deviceObject[selectDevice]['背板'].variants[backType])
+
+      console.log(this.cartItems)
     }
   }
 }
@@ -132,8 +228,8 @@ export default {
   src: url('https://cdn.shopify.com/s/files/1/0274/8717/files/MarkPro.otf?4269257120200746974')
 
 @font-face
-    font-family: NotoSansCJKtc-Regular
-    src: url(https://cdn.shopify.com/s/files/1/0274/8717/files/NotoSansCJKtc-Regular.otf?4935245772218057441)
+  font-family: NotoSansCJKtc-Regular
+  src: url(https://cdn.shopify.com/s/files/1/0274/8717/files/NotoSansCJKtc-Regular.otf?4935245772218057441)
 
 #purchase
   position: relative
